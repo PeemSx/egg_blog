@@ -27,7 +27,7 @@ export const PostCreator = () => {
     }else {
       console.log(formData);
       try {
-        const response = await fetch("http://localhost:3221/blogs",{
+        const response = await fetch("https://egg_api.onrender.com/blogs",{
           method: 'POST',
           headers : {
             'Content-Type' : 'application/json',
