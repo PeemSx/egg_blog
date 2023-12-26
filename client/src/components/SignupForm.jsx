@@ -63,7 +63,7 @@ export const SignupForm = () => {
      
       console.log(formData);
       try {
-        const response = await fetch("http://localhost:3221/users",{
+        const response = await fetch("https://egg_api.onrender.com/users",{
           method: 'POST',
           headers : {
             'Content-Type' : 'application/json',
