@@ -1,24 +1,30 @@
 import React from 'react';
 import { images } from '../constants';
 import { Link,useLocation  } from 'react-router-dom';
+import useAuth from './useAuth';
+
 export const Header = () => {
   const headerH = {
     height: '10vh'
   }
+  const {isAuth, handleLogout} = useAuth();
 
-  const directories = ['articles','pages','pricing','faq']
+  const directories = ['blogs','pages','pricing','faq']
   const li_prop = "text-sm px-4 py-1  rounded-full bg-white text-black"
   const location = useLocation();
+  //const navigate = useNavigate();
 
   let str = "";
   const display_nav = directories.map((path) => {
     str = path.charAt(0).toUpperCase() + path.slice(1);
     return <li key={path} className={`${location.pathname === `/${path}` ? `${li_prop}` : 'text-white'}`}>
 
-      <Link to = {`/${path}`} >{str}</Link>
+      <Link to = {isAuth ? path : "/signin"} >{str}</Link>
     </li>
     }
   );
+  
+ 
   
 
   return (
@@ -37,13 +43,20 @@ export const Header = () => {
               {display_nav}
 
             </ul>
-            <Link to = '/signin'>
-
-              <button className='bg-red-600 hover:bg-red-700 text-white text-sm px-4 py-1  rounded-full'>
-                Sign In
+            { isAuth ?
+              <button className='bg-red-600 hover:bg-red-700 text-white text-sm px-4 py-1 rounded-full' onClick={handleLogout}>
+                Log Out
               </button>
-            
-            </Link>
+              :
+              <Link to = '/signin'>
+
+                <button className='bg-red-600 hover:bg-red-700 text-white text-sm px-4 py-1  rounded-full'>
+                  Sign In
+                </button>
+              
+              </Link> 
+              
+            }
           </div>
         </header>
       </section>

@@ -1,26 +1,27 @@
 const { type } = require('@testing-library/user-event/dist/type');
 const mongoose = require('mongoose');
 
-const blogPostSchema = new mongoose.Schema({
-    title: {
+
+const UserSchemas = new mongoose.Schema({
+    fname: {
       type: String,
       required: true,
     },
-    content: {
+    lname: {
       type: String,
       required: true,
     },
-    author: {
+    username: {
       type: String,
       required: true,
     },
-    authorID:{
+    email:{
         type: String,
         required:true,
     },
-    date: {
-      type: Date,
-      default: Date.now,
+    password: {
+      type: String,
+      required:true,
     },
   },
   {
@@ -29,4 +30,4 @@ const blogPostSchema = new mongoose.Schema({
 );
   
   // Create and export the model based on the schema
-module.exports = mongoose.model('BlogPost', blogPostSchema);
+module.exports = mongoose.model('Users', UserSchemas);
